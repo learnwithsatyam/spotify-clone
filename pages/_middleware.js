@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 export async function middleware(req){
     //token will exist if the user is already logged in.
     const token = await getToken({req , secret: process.env.JWT_SECRET,
+        // this secureCookie solves the problem for the null token that we get in the vercel production environment even after logging in. This saved my butt.
         secureCookie:
         process.env.NEXTAUTH_URL?.startsWith("https://") ??
         !!process.env.VERCEL_URL,
