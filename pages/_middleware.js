@@ -12,8 +12,10 @@ export async function middleware(req){
 
     const {pathname}= req.nextUrl
 
+    console.log('this is token : ', token)
+
     // 1.) if they have a token and try to go to loging page then redirect them to home route
-    if(token && pathname == '/login'){
+    if(token && pathname === '/login'){
         return NextResponse.redirect('/')
     }
 
