@@ -5,7 +5,11 @@ import { NextResponse } from "next/server";
 
 export async function middleware(req){
     //token will exist if the user is already logged in.
-    const token = await getToken({req , secret: process.env.JWT_SECRET})
+    const token = await getToken({req , secret: process.env.JWT_SECRET,
+        secureCookie:
+        process.env.NEXTAUTH_URL?.startsWith("https://") ??
+        !!process.env.VERCEL_URL,
+    })
 
     //alow the request if the following is true :
    
